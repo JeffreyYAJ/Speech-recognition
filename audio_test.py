@@ -1,32 +1,29 @@
 import librosa
 import librosa.display
-import matplotlib.pyplot as plt
 import numpy as np
+import pytest
 
 def extract_features(file_path):
-    y, sr = librosa.load(file_path, duration=1.0) # On coupe à 1 seconde max
+    """Extract MFCC features from audio file."""
+    y, sr = librosa.load(file_path, duration=1.0)
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
-    
     return mfccs
 
 
-mon_fichier = "mon_enregistrement.wav" 
-
-try:
+def test_extract_features_shape():
+    """Test that extract_features returns correct MFCC shape."""
     filename = librosa.ex('trumpet')
-    y, sr = librosa.load(filename)
+    mfccs = extract_features(filename)
     
-    mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
-    
-    print(f"Forme du signal brut : {y.shape}") # (N_samples,)
-    print(f"Forme des MFCC (L'image) : {mfccs.shape}") # (13, Time_steps)
-    
-    plt.figure(figsize=(10, 4))
-    librosa.display.specshow(mfccs, x_axis='time')
-    plt.colorbar()
-    plt.title('MFCC (La "Photo" de ta voix)')
-    plt.tight_layout()
-    plt.show()
+    # MFCC output should have shape (n_mfcc, time_steps)
+    assert mfccs.shape[0] == 13, "MFCC should have 13 coefficients"
+    assert len(mfccs.shape) == 2, "MFCC should be 2D array"
 
-except Exception as e:
-    print(f"Erreur: {e}")
+
+def test_extract_features_not_empty():
+    """Test that MFCC extraction produces non-empty output."""
+    filename = librosa.ex('trumpet')
+    mfccs = extract_features(filename)
+    
+    assert mfccs.size > 0, "MFCC features should not be empty"
+    assert not np.isnan(mfccs).any(), "MFCC features should not contain NaN values"
