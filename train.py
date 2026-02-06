@@ -40,4 +40,48 @@ def build_model(input_shape , num_classes):
     return model
 
 
+def plot_history(history):
+    acc = history.history['accuracy']
+    val_acc = history.history['val_accuracy']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
     
+    epochs_range = range(len(acc))
+
+    plt.figure(figsize=(12, 4))
+    
+    plt.subplot(1, 2, 1)
+    plt.plot(epochs_range, acc, label='Training Precision')
+    plt.plot(epochs_range, val_acc, label='Validation')
+    plt.legend(loc='lower right')
+    plt.title('Accuracy')
+
+    plt.subplot(1, 2, 2)
+    plt.plot(epochs_range, loss, label='Loss training')
+    plt.plot(epochs_range, val_loss, label='Loss Validation')
+    plt.legend(loc='upper right')
+    plt.title('Loss')
+    
+    plt.savefig("results/training_curves.png")
+    plt.show()
+
+if __name__ == "__main__":
+    print("Loading data...")
+    X_train, y_train, X_test, y_test = load_data()
+    
+    num_classes = len(np.unique(y_train)) 
+    input_shape = X_train.shape[1:] 
+    
+    print(f"Input Shape: {input_shape}")
+    print(f"Classes: {num_classes}")
+
+    model = build_model(input_shape, num_classes)
+    model.summary() 
+    
+    print("\n--- Begin training ---")
+    history = model.fit(X_train, y_train, epochs=EPOCHS, validation_data=(X_test, y_test), batch_size=BATCH_SIZE)
+    if not os.path.exists(MODEL_PATH):
+        os.makedirs(MODEL_PATH)
+    model.save(os.path.join(MODEL_PATH, "camer_digit_model.h5"))
+
+    plot_history(history)
