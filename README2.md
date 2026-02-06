@@ -2,7 +2,7 @@
 # Towards Robust Speech Recognition: Addressing African Linguistic Biases
 
 ##  Project Overview
-Current State-of-the-Art (SOTA) Automatic Speech Recognition (ASR) models often underperform on African accents due to the lack of representative training data and phonetic variations in African English and French. 
+Automatic Speech Recognition (ASR) models often underperform on African accents due to the lack of representative training data and phonetic variations in African English and French. 
 
 Inspired by my leadership experience at the **2025 Hultz Prize**, this project aims to quantify and mitigate these biases. The goal is to ensure that critical voice-activated technologies—like the safety gadget my team developed—work reliably for everyone, regardless of their accent.
 
