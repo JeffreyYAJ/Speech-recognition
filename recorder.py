@@ -48,7 +48,14 @@ def record_audio(label):
     
     write(filename, SAMPLE_RATE, audio_data)
     print(f"Recording saved as {filename}")
-    
+
+def record():
+    print("\nSpeak now...", end="", flush=True)
+    audio = sd.rec(int(DURATION * SAMPLE_RATE), samplerate=SAMPLE_RATE, channels=1)
+    sd.wait()
+    print(" Stop.")
+    return audio.flatten()
+
 if __name__ == "__main__":
     print("--- Sound recorder ---")
     create_folder()
