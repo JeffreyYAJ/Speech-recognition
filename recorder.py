@@ -10,6 +10,7 @@ DURATION = 1.0
 CHANNELS = 1
 
 def create_folder():
+    """Create dataset folder structure for recording audio samples."""
     if not os.path.exists(OUTPUT_FOLDER):
         os.makedirs(OUTPUT_FOLDER)
         
@@ -20,6 +21,11 @@ def create_folder():
             print("Dataset folder created")
             
 def record_audio(label):
+    """Record audio sample for a given label.
+    
+    Args:
+        label: Label for the audio sample (0-9)
+    """
     folder_path = os.path.join(OUTPUT_FOLDER, str(label))
     existing_files = [f for f in os.listdir(folder_path) if f.endswith(".wav")]
     
@@ -36,7 +42,7 @@ def record_audio(label):
     print("Recording (Speak now)")
     
     audio_data = sd.rec(int(DURATION * SAMPLE_RATE), samplerate=SAMPLE_RATE, channels=CHANNELS)
-    sd.wait() 
+    sd.wait()
     
     print("Done.")
     
@@ -58,7 +64,7 @@ if __name__ == "__main__":
         if user_input.lower() == 'q':
             print("Closing recorder.")
             break
-            
+        
         if user_input.isdigit() and 0 <= int(user_input) <= 9:
             record_audio(user_input)
         else:
