@@ -29,3 +29,42 @@ The system uses **Mel-Frequency Cepstral Coefficients (MFCCs)** to convert audio
 ├── train.py                # CNN training script
 ├── predict.py              # Real-time microphone inference
 └── requirements.txt        # Project dependencies
+```
+## Installation & Setup
+
+- Clone the repository:
+```bash
+git clone [https://github.com/your-username/cameroon-speech-recognition.git](https://github.com/your-username/cameroon-speech-recognition.git)
+cd Speech-recognition
+```
+- Install Dependencies:
+```bash
+pip install -r requirements.txt
+```
+- Data Collection:
+Use the built-in recorder to build your local dataset:
+```bash
+python recorder.py
+```
+- Preprocessing & Training:
+
+```bash
+python preprocessing.py
+python train.py
+```
+- Live Testing:
+
+```bash
+python predict.py
+```
+## Addressing Bias
+The core of this research focuses on the Confidence Gap.
+By comparing the model's output on "Standard French/English" vs. "Cameroonian Accented" speech, we visualize how intonation and phonetics affect AI decision-making.
+
+## Tech Stack
+Language: Python 3.12
+Signal Processing: Librosa, SciPy
+Deep Learning: TensorFlow / Keras
+Numerical Computing: NumPy, Scikit-learn
+Audio I/O: SoundDevice
+
