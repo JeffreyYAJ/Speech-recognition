@@ -6,7 +6,7 @@ import librosa
 import tensorflow as tf 
 from recorder import record
 
-MODEL_PATH = "models/digit_model.h5"
+MODEL_PATH = "models/camer_digit_model.h5"
 SAMPLE_RATE = 22050
 DURATION = 1.0
 SAMPLE_PER_TRACK = SAMPLE_RATE * DURATION
