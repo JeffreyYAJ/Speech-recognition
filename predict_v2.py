@@ -6,7 +6,6 @@ import librosa
 import tensorflow as tf
 from scipy.io.wavfile import write
 
-# --- CONFIGURATION ---
 MODEL_PATH = "models/camer_digit_model.h5"
 SAMPLE_RATE = 22050
 DURATION = 1.0
